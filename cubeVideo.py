@@ -29,9 +29,12 @@ criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 objp = np.zeros((6*7,3), np.float32)
 objp[:,:2] = np.mgrid[0:7,0:6].T.reshape(-1,2)
 
+cap = cv2.VideoCapture(0)
 
-for fname in glob.glob('images/*.*'):
+while True
   img = cv2.imread(fname)
+  ret, img = cap.read()
+  img = cv2.flip(img,1)
   gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
   ret, corners = cv2.findChessboardCorners(gray, (7,6),None)
 
@@ -55,7 +58,7 @@ for fname in glob.glob('images/*.*'):
     except:
       print 'error'
   else:
-    print 'not found %s'%fname
+    print 'not found'
 
   img = cv2.resize(img,(768,576))
   cv2.imshow('img',img)
